@@ -79,6 +79,16 @@ It then runs negative controls: deliberately wrong expectations or observations,
 
 The MIT licence in `LICENSE` applies to the files of this kit only.
 
+### Try a deliberate mismatch
+
+In a separate copy of the demo, open `scenarios.json`. For `protected-file-change`, change `expect.decision` from `PENDING_APPROVAL` to `APPLIED`, then run:
+
+`node mintigate-demo.mjs`
+
+The demo should exit with code 1: the protected change still requires approval, and the independent check rejects your altered expectation. Inspect the generated `report.json` to see the decision, failed checks, and file hashes.
+
+You control this local demo and can change its policies or code. It illustrates governance rules; it does not protect against its own administrator.
+
 ## Beyond the demo
 
 This demo illustrates scoped changes, human approval boundaries, and audit records using a deterministic agent and a simplified runtime.

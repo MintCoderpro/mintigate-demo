@@ -1,0 +1,17 @@
+/* Synthetic fixture for the Mintigate demo. Written for this kit, not taken from any real site. */
+:root {
+  --mint-demo-accent: 0;
+  --mint-demo-ink: #10231c;
+  --mint-demo-paper: #f6fbf8;
+}
+
+body {
+  margin: 0;
+  color: var(--mint-demo-ink);
+  background: var(--mint-demo-paper);
+  font-family: system-ui, sans-serif;
+}
+
+.demo-badge {
+  opacity: calc(0.4 + var(--mint-demo-accent) * 0.6);
+}

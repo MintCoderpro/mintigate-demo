@@ -1,0 +1,59 @@
+{
+  "format": "mintigate-demo-scenarios/1",
+  "note": "Simulated proposals from a deterministic agent: they are fixed in this file and no model is called. Each expectation is checked independently by smoke-test.mjs.",
+  "policy": {
+    "scope": ["src/styles/"],
+    "protected": ["src/js/story.js"]
+  },
+  "scenarios": [
+    {
+      "id": "allowed-css-change",
+      "title": "Allowed CSS change",
+      "proposal": {
+        "agent": "simulated-agent",
+        "summary": "Set --mint-demo-accent from 0 to 1 in src/styles/base.css",
+        "target": "src/styles/base.css",
+        "kind": "replace",
+        "find": "  --mint-demo-accent: 0;",
+        "replace": "  --mint-demo-accent: 1;"
+      },
+      "expect": {
+        "decision": "APPLIED",
+        "written": true,
+        "changed_line": { "before": "  --mint-demo-accent: 0;", "after": "  --mint-demo-accent: 1;" }
+      }
+    },
+    {
+      "id": "protected-file-change",
+      "title": "Change to a protected file",
+      "proposal": {
+        "agent": "simulated-agent",
+        "summary": "Move the middle step from 50 to 60 in src/js/story.js",
+        "target": "src/js/story.js",
+        "kind": "replace",
+        "find": "  { id: \"middle\", position: 50 },",
+        "replace": "  { id: \"middle\", position: 60 },"
+      },
+      "expect": {
+        "decision": "PENDING_APPROVAL",
+        "written": false
+      }
+    },
+    {
+      "id": "out-of-scope-change",
+      "title": "Change outside the declared scope",
+      "proposal": {
+        "agent": "simulated-agent",
+        "summary": "Change the deployment region in config/deploy.json",
+        "target": "config/deploy.json",
+        "kind": "replace",
+        "find": "\"region\": \"eu\"",
+        "replace": "\"region\": \"us\""
+      },
+      "expect": {
+        "decision": "REFUSED",
+        "written": false
+      }
+    }
+  ]
+}
